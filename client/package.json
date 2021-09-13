@@ -37,8 +37,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "concurrently": "^6.2.1",
-    "nodemon": "^2.0.12"
-  }
+  "devDependencies": {}
 }
