@@ -1,0 +1,6 @@
+language: node_js
+
+deploy:
+  provider: heroku
+  api_key: 4tI0Tg0lyLRY6AXDLE5jlQ
+  app: onboarding-tops
