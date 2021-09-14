@@ -16,7 +16,7 @@ class Grade extends Component{
         axios.get('/api/grades')
             .then((res) => {
                 if(res.data) {
-                    this.setState({ grades: res.data, })
+                    this.setState({ grades: res.data})
                 }})
             .catch((err) => console.log(err));
     };
