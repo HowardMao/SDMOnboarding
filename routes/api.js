@@ -10,7 +10,7 @@ router.get('/grades', (req, res, next) => {
 //I have no clue wtf this does cause I haven't tested it out yet
 router.post('/grades', (req, res, next) => {
     if(req.body.action){
-        Grades.create(req.body).then((data) => res.json(data).catch(next));
+        Grades.create(req.body).then((data) => res.json(data)).catch(next);
     }
     else{
         res.json({error: 'The input field is empty'})
