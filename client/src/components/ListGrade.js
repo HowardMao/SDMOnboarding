@@ -7,7 +7,7 @@ const ListGrade = ({grades, deleteGrade}) => {
                 grades.map((grade) => {
                     return (
                         <li key={grade._id} onClick={() => deleteGrade(grade._id)}>
-                            {grade.action}
+                            {grade._id}
                         </li>
                     );
                 })
