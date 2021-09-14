@@ -18,7 +18,7 @@ class Grade extends Component{
                 if(res.data) {
                     this.setState({ grades: res.data })
                 }})
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err + "hello?"));
     };
 
     deleteGrade = (id) => {

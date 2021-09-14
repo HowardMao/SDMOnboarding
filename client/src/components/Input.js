@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Input extends Component {
-    state = {action: '',};
+    state = {action: ''};
 
     addGrade = () => {
         const task = { action: this.state.action};

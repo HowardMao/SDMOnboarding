@@ -35,7 +35,6 @@ app.use('/api', routes)
 
 app.use((err, req, res, next) => {
     console.log("midware app.use((err,req,res,next) error: " + err);
-    next();
 });
 
 app.listen(port, () => {
