@@ -4,7 +4,9 @@ const Grades = require('../models/grades');
 
 //Uses the 'Grades' model from '../models/grades.js' to find all students with student_id: 0, and only exposes class_id field
 router.get('/grades', (req, res, next) => {
+    console.log("inside grades api before calling Mongo")
     Grades.find({student_id: 0}).then((data) => res.json(data)).catch(next);
+    console.log("inside grades api after calling Mongo")
 });
 
 //I have no clue wtf this does cause I haven't tested it out yet
