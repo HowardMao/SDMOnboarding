@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 // Connect to MongoDB using mongoose API
 // mongoose.connect uses the URI in .env to connect to the correct database (sample_training), the .catch will catch all initial connection errors
-mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log("connected to MongoDB successfully"))
   .catch(error => console.error.bind(console));
 // Binds all errors after intial connection to console
 mongoose.connection.on("err", console.error.bind(console));
