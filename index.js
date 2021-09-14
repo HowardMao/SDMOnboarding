@@ -22,6 +22,10 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 
+app.get('/', function(req, res) {
+    res.send('hello world');
+});
+
 app.use('/api', routes)
 
 app.use((err, req, res, next) => {
