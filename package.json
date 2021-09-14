@@ -4,7 +4,6 @@
   "description": "Software Develop Methods paper assignment for onboarding software.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
