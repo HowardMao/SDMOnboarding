@@ -14,6 +14,9 @@ mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: tr
 // Binds all errors after intial connection to console
 mongoose.connection.on("err", console.error.bind(console));
 
+//mongoose's promise is deprecated
+mongoose.Promise = global.Promise;
+
 // Middlware:
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
