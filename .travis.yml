@@ -1,4 +1,15 @@
 language: node_js
+node_js:
+  - 14.17.6
+
+install:
+  - npm install
+
+script:
+  - npm test
+  - cd client
+  - npm i
+  - npm test
 
 deploy:
   provider: heroku
