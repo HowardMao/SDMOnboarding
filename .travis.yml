@@ -1,9 +1,10 @@
 language: node_js
 node_js:
   - 14.17.6
-  
+
 script:
   - npm test
+  - cd client
   - npm run build
 
 deploy:
