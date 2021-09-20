@@ -1,5 +1,4 @@
 const chai = require('chai');
-const TestUtils = require('react/addons').addons.TestUtils
 
 class Hello{
     Hello(){
@@ -11,7 +10,7 @@ class Hello{
 }
 
 describe("Testing the test", function() {
-    it('should return \'hello\'', function(){
+    it('should return the word \'hello\'', function(){
         var hello = new Hello();
         var word = hello.SayHello();
 
