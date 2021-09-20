@@ -1,11 +1,11 @@
 import React from 'react';
-import Grade from './components/Grade';
+import Goals from './components/Goal';
 import './App.css';
 
 const App = () => {
   return (
     <div className="App">
-      <Grade />
+      <Goals />
     </div>
   );
 };
