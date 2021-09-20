@@ -1,4 +1,5 @@
 const chai = require('chai');
+const TestUtils = require('react/addons').addons.TestUtils
 
 class Hello{
     Hello(){
@@ -16,4 +17,5 @@ describe("Testing the test", function() {
 
         chai.expect(word).to.equal("hello");
     })
+
 })
