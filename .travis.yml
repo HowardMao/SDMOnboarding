@@ -6,7 +6,7 @@ install:
   - npm install
 
 script:
-  - npm test
+  - timeout=20000 npm test
   - cd client
   - npm i
   - npm test
