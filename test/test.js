@@ -32,5 +32,5 @@ describe("Testing getting goals", () =>{
                 res.body.should.be.a('array');
                 done();
             })
-    })
+    }).timeout(5000)
 })
