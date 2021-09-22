@@ -84,7 +84,7 @@ class Goal extends Component {
 
     return (
       <div>
-        <h1>My Goals</h1>
+        <h1>TOPS</h1>
         <Input getGoals={this.getGoalsFromDB} />
         <ListGoal
           goals={goals}

@@ -1,6 +1,6 @@
-import React from 'react';
-import Goals from './components/Goal';
-import './App.css';
+import React from "react";
+import Goals from "./components/Goal";
+import "./App.css";
 
 const App = () => {
   return (
