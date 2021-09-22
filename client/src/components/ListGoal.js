@@ -1,13 +1,13 @@
 import React from "react";
 
-const ListGoal = ({ goals, myGoals }) => {
+const ListGoal = ({ goals, myGoals, goalLists }) => {
   return (
     <div>
       <ul>
         {goals && goals.length > 0 ? (
           goals.map((goal) => {
             return (
-              <li key={goal._id} onClick={() => ClickGoal(goal, myGoals)}>
+              <li key={goal._id} onClick={() => ClickGoal(goal, goalLists)}>
                 {goal.goal}
               </li>
             );
@@ -20,7 +20,7 @@ const ListGoal = ({ goals, myGoals }) => {
         {myGoals && myGoals.length > 0 ? (
           myGoals.map((goal) => {
             return (
-              <li key={goal._id} onClick={() => ClickMyGoal(goal, myGoals)}>
+              <li key={goal._id} onClick={() => ClickMyGoal(goal, goalLists)}>
                 {goal.goal}
               </li>
             );
@@ -33,14 +33,12 @@ const ListGoal = ({ goals, myGoals }) => {
   );
 };
 
-function ClickGoal(goal, myGoals) {
-  myGoals.push(goal);
-  console.log(goal);
-  console.log(myGoals);
+function ClickGoal(goal, goalLists) {
+  goalLists.AddMyGoal(goal);
 }
 
-function ClickMyGoal(goal, myGoals) {
-  myGoals.push(goal);
+function ClickMyGoal(goal, goalLists) {
+  goalLists.AddGoal(goal);
 }
 
 export default ListGoal;
