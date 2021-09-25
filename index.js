@@ -17,7 +17,13 @@ mongoose.connection.on("err", console.error.bind(console));
 //mongoose's promise is deprecated
 mongoose.Promise = global.Promise;
 
-// Middlware: 
+//close mongoose
+function close(){
+  mongoose.connection.close();
+  console.log("mongoose closed")
+}
+
+// Middleware: 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -40,8 +46,9 @@ app.use((err, req, res, next) => {
     console.log("midware app.use((err,req,res,next) error: " + err);
 });
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
-module.exports =  app;
+module.exports.server = server;
+module.exports.close = close;
