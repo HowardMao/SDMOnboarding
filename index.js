@@ -7,17 +7,26 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Connect to MongoDB using mongoose API
-// mongoose.connect uses the URI in .env to connect to the correct database (sample_training), the .catch will catch all initial connection errors
-mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log("connected to MongoDB successfully"))
-  .catch(error => console.error.bind(console));
-// Binds all errors after intial connection to console
-mongoose.connection.on("err", console.error.bind(console));
+//close mongoose
+function close(){
+  mongoose.connection.close();
+}
 
-//mongoose's promise is deprecated
-mongoose.Promise = global.Promise;
+function connectToMongoDB(){
+  // Connect to MongoDB using mongoose API
+  // mongoose.connect uses the URI in .env to connect to the correct database (sample_training), the .catch will catch all initial connection errors
+  mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log("connected to MongoDB successfully"))
+    .catch(error => console.error.bind(console));
+  // Binds all errors after intial connection to console
+  mongoose.connection.on("err", console.error.bind(console));
 
-// Middlware: 
+  //mongoose's promise is deprecated
+  mongoose.Promise = global.Promise;
+}
+
+connectToMongoDB();
+
+// Middleware: 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -40,6 +49,10 @@ app.use((err, req, res, next) => {
     console.log("midware app.use((err,req,res,next) error: " + err);
 });
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
+module.exports.server = server;
+module.exports.connectToMongoDB = connectToMongoDB;
+module.exports.close = close;

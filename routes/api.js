@@ -4,7 +4,11 @@ const Goals = require('../models/goals');
 
 //Uses the 'Goals' model from '../models/goals.js' to find all goals
 router.get('/goals', (req, res, next) => {
-    Goals.find({}).then((data) => res.json(data)).catch(next);
+    console.log("trying to get mongo data")
+    Goals.find({}).then((data) => {
+        res.json(data);
+        console.log("got data")
+    }).catch(next);
 });
 
 //I have no clue wtf this does cause I haven't tested it out yet
