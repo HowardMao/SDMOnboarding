@@ -15,7 +15,7 @@ function close(){
 function connectToMongoDB(){
   // Connect to MongoDB using mongoose API
   // mongoose.connect uses the URI in .env to connect to the correct database (sample_training), the .catch will catch all initial connection errors
-  mongoose.connect('mongodb+srv://admin:admin@onboardingcluster.wv8pt.mongodb.net/OnboardingDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log("connected to MongoDB successfully"))
+  mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log("connected to MongoDB successfully"))
     .catch(error => console.error.bind(console));
   // Binds all errors after intial connection to console
   mongoose.connection.on("err", console.error.bind(console));
