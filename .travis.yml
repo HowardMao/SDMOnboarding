@@ -1,8 +1,7 @@
 language: node_js
 node_js:
   - 14.17.6
-env:
-  - DB = 'mongodb+srv://admin:admin@onboardingcluster.wv8pt.mongodb.net/OnboardingDB?retryWrites=true&w=majority'
+
 services:
   - mongodb
 

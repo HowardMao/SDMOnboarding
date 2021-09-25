@@ -33,6 +33,7 @@ describe("Testing the test in server", function() {
 
         chai.expect(word).to.equal("hello");
     }),
+    
     it('should GET all goals', (done) =>{
         chai.request(server)
             .get('/api/goals')
