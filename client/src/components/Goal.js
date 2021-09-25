@@ -5,7 +5,7 @@ import ListGoal from "./ListGoal";
 
 class Goal extends Component {
   state = {
-    goals: [],
+    poolOfGoals: [],
     myGoals: [],
   };
 
@@ -18,14 +18,13 @@ class Goal extends Component {
   componentDidMount() {
     this.getGoalsFromDB();
   }
-  
 
   getGoalsFromDB = () => {
     axios
       .get("/api/goals")
       .then((res) => {
         if (res.data) {
-          this.setState({ goals: res.data });
+          this.setState({ poolOfGoals: res.data });
         }
       })
       .catch((err) => {
@@ -33,40 +32,30 @@ class Goal extends Component {
       });
   };
 
-  // deleteGoals = (id) => {
-  //     axios.delete(`/api/goals/${id}`)
-  //         .then((res) => {
-  //             if(res.data){
-  //                 this.getGoals();
-  //             }
-  //         })
-  //         .catch((err) => console.log(err));
-  // };
-
   AddMyGoal(goal) {
     var TempMyGoals = this.state.myGoals;
-    var TempGoals = this.state.goals;
+    var TempPOGGoals = this.state.poolOfGoals;
     TempMyGoals.push(goal);
     this.setState({
       myGoals: TempMyGoals,
     });
 
-    const index = TempGoals.indexOf(goal);
+    const index = TempPOGGoals.indexOf(goal);
     if (index > -1) {
-      TempGoals.splice(index, 1);
+      TempPOGGoals.splice(index, 1);
     }
 
     this.setState({
-      goals: TempGoals,
+      poolOfGoals: TempPOGGoals,
     });
   }
 
   AddGoal(goal) {
     var TempMyGoals = this.state.myGoals;
-    var TempGoals = this.state.goals;
-    TempGoals.push(goal);
+    var TempPOGGoals = this.state.poolOfGoals;
+    TempPOGGoals.push(goal);
     this.setState({
-      goals: TempGoals,
+      poolOfGoals: TempPOGGoals,
     });
 
     const index = TempMyGoals.indexOf(goal);
@@ -80,17 +69,16 @@ class Goal extends Component {
   }
 
   render() {
-    let { goals, myGoals } = this.state;
+    let { poolOfGoals, myGoals } = this.state;
 
     return (
       <div>
         <h1>TOPS</h1>
         <Input getGoals={this.getGoalsFromDB} />
         <ListGoal
-          goals={goals}
+          poolOfGoals={poolOfGoals}
           myGoals={myGoals}
           goalLists={this}
-          deleteGoals={this.deleteGoals}
         />
       </div>
     );

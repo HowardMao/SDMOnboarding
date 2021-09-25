@@ -3,33 +3,21 @@ import jest from "jest-mock";
 import App from "./App";
 import Goals from "./components/Goal";
 
-// test("Renders 'My Goals Title'", () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/My Goals/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
-
-// test("Renders 'No Goals in the list'", async () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/No Goals left/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
-
 test("Displaying 'Agile Goals'", async () => {
   var goal = new Goals();
-  goal.state.goals.push({
+  goal.state.poolOfGoals.push({
     _id: "1",
     goal: "Hello",
     goal_id: "1",
   });
 
-  goal.state.goals.push({
+  goal.state.poolOfGoals.push({
     _id: "2",
     goal: "Hi",
     goal_id: "2",
   });
 
-  goal.state.goals.push({
+  goal.state.poolOfGoals.push({
     _id: "3",
     goal: "Hey There",
     goal_id: "3",
@@ -49,19 +37,19 @@ test("Displaying 'Agile Goals'", async () => {
 test("Selecting 'Agile Goals'", async () => {
   //Creates and pushes a bunch of goals onto the website
   var goal = new Goals();
-  goal.state.goals.push({
+  goal.state.poolOfGoals.push({
     _id: "1",
     goal: "Hello",
     goal_id: "1",
   });
 
-  goal.state.goals.push({
+  goal.state.poolOfGoals.push({
     _id: "2",
     goal: "Hi",
     goal_id: "2",
   });
 
-  goal.state.goals.push({
+  goal.state.poolOfGoals.push({
     _id: "3",
     goal: "Hey There",
     goal_id: "3",
