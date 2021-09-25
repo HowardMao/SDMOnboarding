@@ -36,5 +36,5 @@ describe("Testing the test in server", function() {
                 res.body.should.be.a('array');
                 done();
             })
-    }).timeout(10000)
+    }).timeout(20000)
 })
