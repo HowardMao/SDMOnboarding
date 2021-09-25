@@ -20,7 +20,6 @@ mongoose.Promise = global.Promise;
 //close mongoose
 function close(){
   mongoose.connection.close();
-  console.log("mongoose closed")
 }
 
 // Middleware: 
