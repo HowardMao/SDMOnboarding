@@ -15,15 +15,14 @@ class Hello{
 }
 
 describe("Testing the test in server", function() {
+
     it('should return \'hello\'', function(){
         var hello = new Hello();
         var word = hello.SayHello();
 
         chai.expect(word).to.equal("hello");
-    })
-})
+    }),
 
-describe("Testing getting goals", () =>{
     it('should GET all goals', (done) =>{
         chai.request(server)
             .get('/api/goals')
@@ -32,5 +31,5 @@ describe("Testing getting goals", () =>{
                 res.body.should.be.a('array');
                 done();
             })
-    }).timeout(20000)
+    }).timeout(10000)
 })
