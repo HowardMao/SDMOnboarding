@@ -3,6 +3,7 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../index.js').server;
 let close = require('../index.js').close;
+let open = require('../index.js').connectToMongoDB;
 
 chai.use(chaiHttp);
 chai.should();
@@ -16,6 +17,10 @@ class Hello{
 }
 
 describe("Testing the test in server", function() {
+
+    before(() =>{
+        open();
+    })
 
     after(() => {
         server.close();
