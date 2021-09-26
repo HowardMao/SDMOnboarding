@@ -4,19 +4,10 @@ let chaiHttp = require('chai-http');
 let server = require('../index.js').server;
 let close = require('../index.js').close;
 let open = require('../index.js').connectToMongoDB;
-
 chai.use(chaiHttp);
 chai.should();
 
-class Hello{
-    Hello(){}
-
-    SayHello(){
-        return "hello";
-    }
-}
-
-describe("Testing the test in server", function() {
+describe("Testing MongoDB functions", function() {
 
     before(() =>{
         open();
@@ -27,13 +18,6 @@ describe("Testing the test in server", function() {
         close();
     })
     
-    it('should return \'hello\'', function(){
-        var hello = new Hello();
-        var word = hello.SayHello();
-
-        chai.expect(word).to.equal("hello");
-    }),
-    
     it('should GET all goals', (done) =>{
         chai.request(server)
             .get('/api/goals')
@@ -42,5 +26,6 @@ describe("Testing the test in server", function() {
                 res.body.should.be.a('array');
                 done();
             })
-    }).timeout(50000)
+    // gave extra time just in case the mongodb server takes a while to load the data
+    }).timeout(20000)
 })
