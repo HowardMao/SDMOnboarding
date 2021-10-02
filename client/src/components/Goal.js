@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Input from "./Input";
 import ListGoal from "./ListGoal";
 
 class Goal extends Component {
@@ -9,16 +8,11 @@ class Goal extends Component {
     myGoals: [],
   };
 
-  constructor(props) {
-    super(props);
-
-    this.AddMyGoal = this.AddMyGoal.bind(this);
-  }
-
   componentDidMount() {
     this.getGoalsFromDB();
   }
 
+  // Gets all the goals from the mongodb database and puts the data into poolOfGoals
   getGoalsFromDB = () => {
     axios
       .get("/api/goals")
@@ -32,40 +26,38 @@ class Goal extends Component {
       });
   };
 
+  // Adds a goal to myGoals
   AddMyGoal(goal) {
+    // Adds the parameter goal to myGoals
+    console.log("wiu")
     var TempMyGoals = this.state.myGoals;
-    var TempPOGGoals = this.state.poolOfGoals;
     TempMyGoals.push(goal);
     this.setState({
       myGoals: TempMyGoals,
     });
-
-    const index = TempPOGGoals.indexOf(goal);
-    if (index > -1) {
-      TempPOGGoals.splice(index, 1);
-    }
-
-    this.setState({
-      poolOfGoals: TempPOGGoals,
-    });
   }
 
-  AddGoal(goal) {
+  // Remove a goal my MyGoals
+  RemoveFromMyGoal(goal){
     var TempMyGoals = this.state.myGoals;
-    var TempPOGGoals = this.state.poolOfGoals;
-    TempPOGGoals.push(goal);
-    this.setState({
-      poolOfGoals: TempPOGGoals,
-    });
-
     const index = TempMyGoals.indexOf(goal);
     if (index > -1) {
       TempMyGoals.splice(index, 1);
     }
-
     this.setState({
       myGoals: TempMyGoals,
     });
+  }
+
+  // Checks My Goals for a goal and returns true if value is found
+  IsGoalInMyGoals(goal){
+    var TempMyGoals = this.state.myGoals;
+    const index = TempMyGoals.indexOf(goal);
+    console.log(TempMyGoals)
+    if (index > -1) {
+      return true;
+    }
+    return false;
   }
 
   render() {
@@ -74,7 +66,6 @@ class Goal extends Component {
     return (
       <div>
         <h1>TOPS</h1>
-        <Input getGoals={this.getGoalsFromDB} />
         <ListGoal
           poolOfGoals={poolOfGoals}
           myGoals={myGoals}

@@ -1,4 +1,5 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
   return (
@@ -7,9 +8,14 @@ const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
       <ul>
         {poolOfGoals && poolOfGoals.length > 0 ? (
           poolOfGoals.map((goal) => {
-            return (
-              <li key={goal._id} onClick={() => ClickPOGGoal(goal, goalLists)}>
-                {goal.goal}
+            return (  
+              <li key={goal._id}>
+                <div>
+                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" onChange={() => ClickPOGGoal(goal, goalLists)}/>
+                    <label style={{color:"#ffffff", paddingLeft:"10px"}} class="form-check-label" for="flexRadioDefault1">
+                      {goal.goal}
+                    </label>
+                </div>
               </li>
             );
           })
@@ -17,33 +23,19 @@ const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
           <li>All goals are selected</li>
         )}
       </ul>
-      <h2>My Goals</h2>
-      <ul>
-        {myGoals && myGoals.length > 0 ? (
-          myGoals.map((goal) => {
-            return (
-              <li
-                key={goal._id}
-                onClick={() => ClickMyGoalsGoal(goal, goalLists)}
-              >
-                {goal.goal}
-              </li>
-            );
-          })
-        ) : (
-          <li>No goals selected</li>
-        )}
-      </ul>
     </div>
   );
 };
 
 function ClickPOGGoal(goal, goalLists) {
-  goalLists.AddMyGoal(goal);
-}
-
-function ClickMyGoalsGoal(goal, goalLists) {
-  goalLists.AddGoal(goal);
+  if(goalLists.IsGoalInMyGoals(goal)){
+    console.log("remove from my goal")
+    goalLists.RemoveFromMyGoal(goal);
+  }
+  else{
+    console.log("add to my goal")
+    goalLists.AddMyGoal(goal);
+  }
 }
 
 export default ListGoal;
