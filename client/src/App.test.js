@@ -3,8 +3,9 @@ import jest from "jest-mock";
 import App from "./App";
 import Goals from "./components/Goal";
 
-test("Displaying 'Agile Goals'", async () => {
-  var goal = new Goals();
+var goal = new Goals();
+
+beforeEach(()=>{
   goal.state.poolOfGoals.push({
     _id: "1",
     goal: "Hello",
@@ -22,7 +23,13 @@ test("Displaying 'Agile Goals'", async () => {
     goal: "Hey There",
     goal_id: "3",
   });
+})
 
+afterEach(()=>{
+  goal = new Goals();
+})
+
+test("Displaying 'Agile Goals'", async () => {
   render(goal.render());
   var linkElement = screen.getByText("Hello");
   expect(linkElement).toBeInTheDocument();
@@ -35,26 +42,6 @@ test("Displaying 'Agile Goals'", async () => {
 });
 
 test("Selecting 'Agile Goals'", async () => {
-  //Creates and pushes a bunch of goals onto the website
-  var goal = new Goals();
-  goal.state.poolOfGoals.push({
-    _id: "1",
-    goal: "Hello",
-    goal_id: "1",
-  });
-
-  goal.state.poolOfGoals.push({
-    _id: "2",
-    goal: "Hi",
-    goal_id: "2",
-  });
-
-  goal.state.poolOfGoals.push({
-    _id: "3",
-    goal: "Hey There",
-    goal_id: "3",
-  });
-
   //Render the goals
   render(goal.render());
   //Gets a goal and checks whether it's on the website
