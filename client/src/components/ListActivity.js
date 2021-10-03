@@ -6,8 +6,8 @@ const ListActivity = ({ allActivities, myActivities }) => {
         <div>
             <h2>Activities</h2>
             <ul>
-                {allActivities && allActivities.length > 0 ? (
-                    allActivities.map((activity) => {
+                {myActivities && myActivities.length > 0 ? (
+                    myActivities.map((activity) => {
                         return (
                             <li key={activity._id}>
                                 <label style={{ color: "#ffffff", paddingLeft: "10px" }} class="form-check-label" for="flexRadioDefault1">
@@ -17,7 +17,7 @@ const ListActivity = ({ allActivities, myActivities }) => {
                         );
                     })
                 ) : (
-                    <li>No goals are selected</li>
+                    <li style={{ color: "#ffffff", paddingLeft: "10px" }} >No goals are selected</li>
                 )}
             </ul>
         </div>

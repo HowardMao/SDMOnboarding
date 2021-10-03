@@ -10,6 +10,28 @@ class Activity extends Component {
 
   componentDidMount() {
     this.getAllActivitiesFromDB();
+    document.body.addEventListener('updateActivities', this.handleEvent, false);
+  }
+
+  handleEvent(event) {
+    console.log(event);
+
+
+    //this.getAllMyActivities(event.detail);
+
+
+
+  }
+
+  // Updates myActivities
+  getAllMyActivities(goal) {
+
+    //myActivities = goal;
+  }
+
+  // Converts the array from the MongoDB activity into a dictionary
+  convertArrayToDictionary() {
+
   }
 
   // Gets all the goals from the mongodb database and puts the data into poolOfGoals
@@ -25,40 +47,6 @@ class Activity extends Component {
         console.log(err);
       });
   };
-
-  // // Adds a goal to myGoals
-  // AddMyGoal(goal) {
-  //   // Adds the parameter goal to myGoals
-  //   console.log("wiu");
-  //   var TempMyGoals = this.state.myGoals;
-  //   TempMyGoals.push(goal);
-  //   this.setState({
-  //     myGoals: TempMyGoals,
-  //   });
-  // }
-
-  // // Remove a goal my MyGoals
-  // RemoveFromMyGoal(goal) {
-  //   var TempMyGoals = this.state.myGoals;
-  //   const index = TempMyGoals.indexOf(goal);
-  //   if (index > -1) {
-  //     TempMyGoals.splice(index, 1);
-  //   }
-  //   this.setState({
-  //     myGoals: TempMyGoals,
-  //   });
-  // }
-
-  // // Checks My Goals for a goal and returns true if value is found
-  // IsGoalInMyGoals(goal) {
-  //   var TempMyGoals = this.state.myGoals;
-  //   const index = TempMyGoals.indexOf(goal);
-  //   console.log(TempMyGoals);
-  //   if (index > -1) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   render() {
     let { allActivities, myActivities } = this.state;

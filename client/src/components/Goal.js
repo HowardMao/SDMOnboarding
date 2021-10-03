@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ListGoal from "./ListGoal";
-import Activity from "./Activity";
 
 class Goal extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.FireUpdateActivityEvent = this.FireUpdateActivityEvent.bind(this);
+  }
+
   state = {
     poolOfGoals: [],
     myGoals: [],
@@ -11,6 +17,14 @@ class Goal extends Component {
 
   componentDidMount() {
     this.getGoalsFromDB();
+  }
+
+  // Sends out the goal parameter
+  FireUpdateActivityEvent(goal) {
+    var event = new CustomEvent('updateActivities', { detail: goal });
+
+    // Fires an event "updateActivities" for Activities class to listen 
+    document.body.dispatchEvent(event);
   }
 
   // Gets all the goals from the mongodb database and puts the data into poolOfGoals
@@ -30,12 +44,12 @@ class Goal extends Component {
   // Adds a goal to myGoals
   AddMyGoal(goal) {
     // Adds the parameter goal to myGoals
-    console.log("wiu")
     var TempMyGoals = this.state.myGoals;
     TempMyGoals.push(goal);
     this.setState({
       myGoals: TempMyGoals,
     });
+    this.FireUpdateActivityEvent(goal);
   }
 
   // Remove a goal my MyGoals
@@ -59,6 +73,10 @@ class Goal extends Component {
       return true;
     }
     return false;
+  }
+
+  GetVHActivities(goal) {
+    return goal.vh_activities;
   }
 
   render() {
