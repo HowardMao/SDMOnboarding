@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import ListGoal from "./ListGoal";
 import Activity from "./Activity";
-import ListActivity from "./ListActivity";
 
 class Goal extends Component {
   state = {

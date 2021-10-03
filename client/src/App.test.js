@@ -6,7 +6,7 @@ import Activity from "./components/Activity";
 
 var goal = new Goals();
 
-beforeEach(()=>{
+beforeEach(() => {
   //setting up mock goals
   goal.state.poolOfGoals.push({
     _id: "1",
@@ -21,14 +21,14 @@ beforeEach(()=>{
     goal: "Hi",
     goal_id: "2",
     vh_activities: [2],
-    h_activities: [2,1],
+    h_activities: [2, 1],
   });
 
   goal.state.poolOfGoals.push({
     _id: "3",
     goal: "Hey There",
     goal_id: "3",
-    vh_activities: [1,2],
+    vh_activities: [1, 2],
     h_activities: [1],
   });
 
@@ -44,13 +44,14 @@ beforeEach(()=>{
   // });
 })
 
-afterEach(()=>{
+afterEach(() => {
   goal = new Goals();
   // activity = new Activ
 })
 
 test("Displaying 'Agile Goals'", async () => {
   render(goal.render());
+
   var linkElement = screen.getByText("Hello");
   expect(linkElement).toBeInTheDocument();
 
@@ -75,7 +76,7 @@ test("Selecting 'Agile Goals'", async () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
 
   //Check if 'My Goals' is updated with the new Goal 'Hello'
-  expect(
-    goal.state.myGoals.includes({ _id: "222", goal: "wefwagg", goal_id: "5" })
-  );
+  expect(goal.state.myGoals[0]._id).toEqual("1");
+  expect(goal.state.myGoals[0].goal_id).toEqual("1");
+  expect(goal.state.myGoals[0].goal).toEqual("Hello");
 });
