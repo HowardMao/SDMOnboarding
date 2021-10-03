@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ListGoal from "./ListGoal";
+import Activity from "./Activity";
+import ListActivity from "./ListActivity";
 
 class Goal extends Component {
   state = {
@@ -38,7 +40,7 @@ class Goal extends Component {
   }
 
   // Remove a goal my MyGoals
-  RemoveFromMyGoal(goal){
+  RemoveFromMyGoal(goal) {
     var TempMyGoals = this.state.myGoals;
     const index = TempMyGoals.indexOf(goal);
     if (index > -1) {
@@ -50,7 +52,7 @@ class Goal extends Component {
   }
 
   // Checks My Goals for a goal and returns true if value is found
-  IsGoalInMyGoals(goal){
+  IsGoalInMyGoals(goal) {
     var TempMyGoals = this.state.myGoals;
     const index = TempMyGoals.indexOf(goal);
     console.log(TempMyGoals)
@@ -65,7 +67,6 @@ class Goal extends Component {
 
     return (
       <div>
-        <h1>TOPS</h1>
         <ListGoal
           poolOfGoals={poolOfGoals}
           myGoals={myGoals}
