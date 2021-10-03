@@ -5,7 +5,7 @@ import Goals from "./components/Goal";
 
 var goal = new Goals();
 
-beforeEach(()=>{
+beforeEach(() => {
   goal.state.poolOfGoals.push({
     _id: "1",
     goal: "Hello",
@@ -23,14 +23,15 @@ beforeEach(()=>{
     goal: "Hey There",
     goal_id: "3",
   });
-})
+});
 
-afterEach(()=>{
+afterEach(() => {
   goal = new Goals();
-})
+});
 
 test("Displaying 'Agile Goals'", async () => {
   render(goal.render());
+
   var linkElement = screen.getByText("Hello");
   expect(linkElement).toBeInTheDocument();
 
@@ -54,8 +55,10 @@ test("Selecting 'Agile Goals'", async () => {
   fireEvent.click(selectedGoal);
   expect(handleClick).toHaveBeenCalledTimes(1);
 
+  console.log(goal.state.myGoals);
+
   //Check if 'My Goals' is updated with the new Goal 'Hello'
-  expect(
-    goal.state.myGoals.includes({ _id: "1", goal: "Hello", goal_id: "1" })
-  );
+  expect(goal.state.myGoals[0]._id).toEqual("1");
+  expect(goal.state.myGoals[0].goal_id).toEqual("1");
+  expect(goal.state.myGoals[0].goal).toEqual("Hello");
 });
