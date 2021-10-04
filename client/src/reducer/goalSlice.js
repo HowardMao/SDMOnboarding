@@ -5,13 +5,16 @@ export const goalSlice = createSlice({
   initialState: {
     goal: {},
     deletedGoal: {},
+    selectedGoal: {},
   },
   reducers: {
     GetGoal: (state, goal) => {
       state.goal = goal;
+      state.selectedGoal[goal.goal_id] = goal;
     },
     RemoveGoal: (state, goal) => {
       state.deletedGoal = goal;
+      delete state.selectedGoal[goal.goal_id];
     },
   },
 });

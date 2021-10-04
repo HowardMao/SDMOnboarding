@@ -38,7 +38,9 @@ class Activity extends Component {
     this.setState({ myActivities: activities });
   }
 
-  removeGoalActivities(goal) {}
+  removeGoalActivities(goal) {
+    console.log(goal);
+  }
 
   // Converts the array from the MongoDB activity into a dictionary
   convertsAllActivitiesArrayToDictionary(array) {
