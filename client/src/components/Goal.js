@@ -3,7 +3,6 @@ import axios from "axios";
 import ListGoal from "./ListGoal";
 
 class Goal extends Component {
-
   constructor(props) {
     super(props);
     this.FireUpdateActivityEvent = this.FireUpdateActivityEvent.bind(this);
@@ -20,9 +19,9 @@ class Goal extends Component {
 
   // Sends out the goal parameter
   FireUpdateActivityEvent(goal) {
-    var event = new CustomEvent('updateActivities', { detail: goal });
+    var event = new CustomEvent("updateActivities", { detail: goal });
 
-    // Fires an event "updateActivities" for Activities class to listen 
+    // Fires an event "updateActivities" for Activities class to listen
     window.dispatchEvent(event);
   }
 
@@ -48,10 +47,6 @@ class Goal extends Component {
     this.setState({
       myGoals: TempMyGoals,
     });
-
-    this.props.activity.getAllMyActivities(goal);
-
-    //this.props.activity.getAllMyActivities(goal);
   }
 
   // Remove a goal my MyGoals

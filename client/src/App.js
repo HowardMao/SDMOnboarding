@@ -5,21 +5,16 @@ import "./App.css";
 import { Col, Container, Row } from "react-bootstrap";
 
 const App = () => {
-
-  var activity = new Activity();
-  var activities = activity.render();
-  var goals = <Goals activity={activity}/>;
-
   return (
     <div className="App">
       <h1>TOPS</h1>
       <Container>
         <Row>
           <Col>
-            {goals}
+            <Goals />
           </Col>
           <Col>
-            {activities}
+            <Activity />
           </Col>
         </Row>
       </Container>

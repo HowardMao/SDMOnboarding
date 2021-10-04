@@ -1,7 +1,11 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useDispatch } from "react-redux";
+import { GetGoal, RemoveGoal } from "../reducer/goalSlice";
 
 const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <h2>Goals</h2>
@@ -11,8 +15,24 @@ const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
             return (
               <li key={goal._id}>
                 <div>
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" onChange={() => ClickPOGGoal(goal, goalLists)} />
-                  <label style={{ color: "#ffffff", paddingLeft: "10px" }} class="form-check-label" for="flexRadioDefault1">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault1"
+                    onChange={() => {
+                      if (!ClickPOGGoal(goal, goalLists)) {
+                        dispatch(GetGoal(goal));
+                      } else {
+                        dispatch(RemoveGoal(goal));
+                      }
+                    }}
+                  />
+                  <label
+                    style={{ color: "#ffffff", paddingLeft: "10px" }}
+                    class="form-check-label"
+                    for="flexRadioDefault1"
+                  >
                     {goal.goal}
                   </label>
                 </div>
@@ -31,11 +51,12 @@ function ClickPOGGoal(goal, goalLists) {
   // If goal is already selected
   if (goalLists.IsGoalInMyGoals(goal)) {
     goalLists.RemoveFromMyGoal(goal);
+    return true;
   }
   // If goal isn't selected
   else {
     goalLists.AddMyGoal(goal);
-
+    return false;
   }
 }
 
