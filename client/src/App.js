@@ -1,20 +1,25 @@
 import React from "react";
 import Goals from "./components/Goal";
-import Activities from "./components/Activity";
+import Activity from "./components/Activity";
 import "./App.css";
 import { Col, Container, Row } from "react-bootstrap";
 
 const App = () => {
+
+  var activity = new Activity();
+  var activities = activity.render();
+  var goals = <Goals activity={activity}/>;
+
   return (
     <div className="App">
       <h1>TOPS</h1>
       <Container>
         <Row>
           <Col>
-            <Goals />
+            {goals}
           </Col>
           <Col>
-            <Activities />
+            {activities}
           </Col>
         </Row>
       </Container>

@@ -4,34 +4,55 @@ import ListActivity from "./ListActivity";
 
 class Activity extends Component {
   state = {
-    allActivities: [],
+    allActivities: {},
     myActivities: [],
   };
+  constructor(props){
+    super(props);
+  }
+
 
   componentDidMount() {
     this.getAllActivitiesFromDB();
-    document.body.addEventListener('updateActivities', this.handleEvent, false);
-  }
-
-  handleEvent(event) {
-    console.log(event);
 
 
-    //this.getAllMyActivities(event.detail);
-
-
+    window.addEventListener('updateActivities',  (event) => {
+     // this.getAllMyActivities(event.detail);
+    });
 
   }
 
-  // Updates myActivities
-  getAllMyActivities(goal) {
+  // gets the vh & h activities and returns them in a variable
+  getAllMyActivities(goal){
 
-    //myActivities = goal;
+    console.log(":)");
+    var activities = {};
+    // Iterate through the vh_activities array in goal and add the <activity_id><activity> pair into the activities dictionary
+    for(let i in goal.vh_activities){
+      activities[goal.vh_activities[i]] = this.state.allActivities[goal.vh_activities[i]];
+    }
+
+    // Iterate through the h_activities array in goal and add the <activity_id><activity> pair into the activities dictionary
+    for(let i in goal.h_activities){
+      activities[goal.h_activities[i]] = this.state.allActivities[goal.h_activities[i]];
+    }
+    
+    // Convert the activities dictionary into an array by ignoring the activity_id and just using the activity data
+    var newActivities = Object.values(activities);
+  
+    var tempMyActivities = this.state.myActivities;
+    tempMyActivities += newActivities;
+
+    this.setState({ myActivities: tempMyActivities});
   }
-
+  
   // Converts the array from the MongoDB activity into a dictionary
-  convertArrayToDictionary() {
-
+  convertsAllActivitiesArrayToDictionary(array) {
+    var dictionary = {};
+    for(var item in array){
+      dictionary[array[item].activity_id] = array[item];
+    }
+    return dictionary;
   }
 
   // Gets all the goals from the mongodb database and puts the data into poolOfGoals
@@ -40,7 +61,7 @@ class Activity extends Component {
       .get("/api/activities")
       .then((res) => {
         if (res.data) {
-          this.setState({ allActivities: res.data });
+          this.setState({ allActivities: this.convertsAllActivitiesArrayToDictionary(res.data)});
         }
       })
       .catch((err) => {

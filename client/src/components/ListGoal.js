@@ -30,12 +30,10 @@ const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
 function ClickPOGGoal(goal, goalLists) {
   // If goal is already selected
   if (goalLists.IsGoalInMyGoals(goal)) {
-    console.log("remove from my goal")
     goalLists.RemoveFromMyGoal(goal);
   }
   // If goal isn't selected
   else {
-    console.log("add to my goal")
     goalLists.AddMyGoal(goal);
 
   }

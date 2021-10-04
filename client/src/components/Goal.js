@@ -6,7 +6,6 @@ class Goal extends Component {
 
   constructor(props) {
     super(props);
-
     this.FireUpdateActivityEvent = this.FireUpdateActivityEvent.bind(this);
   }
 
@@ -24,7 +23,7 @@ class Goal extends Component {
     var event = new CustomEvent('updateActivities', { detail: goal });
 
     // Fires an event "updateActivities" for Activities class to listen 
-    document.body.dispatchEvent(event);
+    window.dispatchEvent(event);
   }
 
   // Gets all the goals from the mongodb database and puts the data into poolOfGoals
@@ -49,7 +48,10 @@ class Goal extends Component {
     this.setState({
       myGoals: TempMyGoals,
     });
-    this.FireUpdateActivityEvent(goal);
+
+    this.props.activity.getAllMyActivities(goal);
+
+    //this.props.activity.getAllMyActivities(goal);
   }
 
   // Remove a goal my MyGoals
@@ -68,7 +70,6 @@ class Goal extends Component {
   IsGoalInMyGoals(goal) {
     var TempMyGoals = this.state.myGoals;
     const index = TempMyGoals.indexOf(goal);
-    console.log(TempMyGoals)
     if (index > -1) {
       return true;
     }
