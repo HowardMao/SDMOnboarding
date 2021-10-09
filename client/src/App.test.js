@@ -1,12 +1,27 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import jest from "jest-mock";
+import { shallow } from 'enzyme';
+import * as redux from "react-redux";
 import App from "./App";
 import Goals from "./components/Goal";
 import Activity from "./components/Activity";
 
 var goal = new Goals();
+let spyOnUseSelector;
+let spyOnUseDispatch;
+let mockDispatch;
 
 beforeEach(() => {
+  // Mock useSelector hook
+  spyOnUseSelector = jest.spyOn(redux, 'useSelector');
+  spyOnUseSelector.mockReturnValue([{ id: 1, text: 'Old Item' }]);
+
+  // Mock useDispatch hook
+  spyOnUseDispatch = jest.spyOn(redux, 'useDispatch');
+  // Mock dispatch function returned from useDispatch
+  mockDispatch = jest.fn();
+  spyOnUseDispatch.mockReturnValue(mockDispatch);
+
   //setting up mock goals
   goal.state.poolOfGoals.push({
     _id: "1",
