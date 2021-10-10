@@ -1,20 +1,40 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useDispatch } from "react-redux";
+import { GetGoal, RemoveGoal } from "../reducer/goalSlice";
 
 const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
+  const dispatch = useDispatch();
+
   return (
     <div>
-      <h2>Pool of Goals</h2>
+      <h2>Goals</h2>
       <ul>
         {poolOfGoals && poolOfGoals.length > 0 ? (
           poolOfGoals.map((goal) => {
-            return (  
+            return (
               <li key={goal._id}>
                 <div>
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" onChange={() => ClickPOGGoal(goal, goalLists)}/>
-                    <label style={{color:"#ffffff", paddingLeft:"10px"}} class="form-check-label" for="flexRadioDefault1">
-                      {goal.goal}
-                    </label>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault1"
+                    onChange={() => {
+                      if (!ClickPOGGoal(goal, goalLists)) {
+                        dispatch(GetGoal(goal));
+                      } else {
+                        dispatch(RemoveGoal(goal));
+                      }
+                    }}
+                  />
+                  <label
+                    style={{ color: "#ffffff", paddingLeft: "10px" }}
+                    class="form-check-label"
+                    for="flexRadioDefault1"
+                  >
+                    {goal.goal}
+                  </label>
                 </div>
               </li>
             );
@@ -28,13 +48,15 @@ const ListGoal = ({ poolOfGoals, myGoals, goalLists }) => {
 };
 
 function ClickPOGGoal(goal, goalLists) {
-  if(goalLists.IsGoalInMyGoals(goal)){
-    console.log("remove from my goal")
+  // If goal is already selected
+  if (goalLists.IsGoalInMyGoals(goal)) {
     goalLists.RemoveFromMyGoal(goal);
+    return true;
   }
-  else{
-    console.log("add to my goal")
+  // If goal isn't selected
+  else {
     goalLists.AddMyGoal(goal);
+    return false;
   }
 }
 
