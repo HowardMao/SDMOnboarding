@@ -5,7 +5,6 @@ import ListGoal from "./ListGoal";
 class Goal extends Component {
   constructor(props) {
     super(props);
-    this.FireUpdateActivityEvent = this.FireUpdateActivityEvent.bind(this);
   }
 
   state = {
@@ -15,14 +14,6 @@ class Goal extends Component {
 
   componentDidMount() {
     this.getGoalsFromDB();
-  }
-
-  // Sends out the goal parameter
-  FireUpdateActivityEvent(goal) {
-    var event = new CustomEvent("updateActivities", { detail: goal });
-
-    // Fires an event "updateActivities" for Activities class to listen
-    window.dispatchEvent(event);
   }
 
   // Gets all the goals from the mongodb database and puts the data into poolOfGoals

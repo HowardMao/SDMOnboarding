@@ -186,7 +186,7 @@ test("Deselecting a 'Agile Goal' deselects the related activities", async () => 
   activity.removeGoalActivities(SelectedGoal);
 
   //Activity should not be inside myActivities
-  expect(true).toEqual(!(2 in activity.state.myActivities[2]));
+  expect(true).toEqual(typeof activity.state.myActivities[2] == "undefined");
 });
 
 test("Deselecting a 'Agile Goal' deselects the related activities (Two goals with the same activity)", async () => {
@@ -219,6 +219,6 @@ test("Deselecting a 'Agile Goal' deselects the related activities (Two goals wit
   //Deselect goal
   activity.removeGoalActivities(SelectedGoal);
 
-  //Activity should still be inside myActivities
-  expect(false).toEqual(!(2 in activity.state.myActivities[2]));
+  //Activity 2 should still be inside myActivities because of Selected Goal 2
+  expect(!(2 in activity.state.myActivities)).toEqual(false);
 });
