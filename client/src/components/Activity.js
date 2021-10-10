@@ -20,7 +20,11 @@ class Activity extends Component {
     );
   }
 
-  // gets the vh & h activities and returns them in a variable
+  /**
+   * Gets Goal's related activties (e.g.)
+   * The vh & h activities and returns them in a variable
+   * @param {Goal} goal
+   */
   getAllMyActivities(goal) {
     var activities = this.state.myActivities;
     // Iterate through the vh_activities array in goal and add the <activity_id><activity> pair into the activities dictionary
@@ -38,17 +42,9 @@ class Activity extends Component {
     this.setState({ myActivities: activities });
   }
 
+  //Not Implemented
   removeGoalActivities(goal) {
     console.log(goal);
-  }
-
-  // Converts the array from the MongoDB activity into a dictionary
-  convertsAllActivitiesArrayToDictionary(array) {
-    var dictionary = {};
-    for (var item in array) {
-      dictionary[array[item].activity_id] = array[item];
-    }
-    return dictionary;
   }
 
   // Gets all the goals from the mongodb database and puts the data into poolOfGoals
@@ -68,6 +64,19 @@ class Activity extends Component {
         console.log(err);
       });
   };
+
+  /**
+   * Converts the array from the MongoDB activity into a dictionary
+   * @param {*} array
+   * @returns
+   */
+  convertsAllActivitiesArrayToDictionary(array) {
+    var dictionary = {};
+    for (var item in array) {
+      dictionary[array[item].activity_id] = array[item];
+    }
+    return dictionary;
+  }
 
   render() {
     let { allActivities, myActivities } = this.state;
