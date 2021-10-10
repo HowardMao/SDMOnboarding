@@ -15,42 +15,7 @@ let spyOnUseSelector;
 let spyOnUseDispatch;
 let mockDispatch;
 
-export const handlers = [
-  rest.get("/api/goals", (req, res, ctx) => {
-    var ArrGoals = [];
-    ArrGoals.push({
-      _id: "1",
-      goal: "Hello",
-      goal_id: "1",
-      vh_activities: [1],
-      h_activities: [2],
-    });
-
-    ArrGoals.push({
-      _id: "2",
-      goal: "Hi",
-      goal_id: "2",
-      vh_activities: [2],
-      h_activities: [2, 1],
-    });
-
-    ArrGoals.push({
-      _id: "3",
-      goal: "Hey There",
-      goal_id: "3",
-      vh_activities: [1, 2],
-      h_activities: [1],
-    });
-
-    return res(ctx.json(ArrGoals), ctx.delay(150));
-  }),
-];
-
-const server = setupServer(...handlers);
-
 beforeEach(() => {
-  server.listen();
-
   // Mock useSelector hook
   spyOnUseSelector = jest.spyOn(redux, "useSelector");
   spyOnUseSelector.mockReturnValue([{ id: 1, text: "Old Item" }]);
@@ -106,10 +71,7 @@ beforeEach(() => {
 afterEach(() => {
   goal = new Goals();
   activity = new Activity();
-  server.resetHandlers();
 });
-
-afterEach(() => server.close());
 
 test("Displaying 'Agile Goals'", async () => {
   render(goal.render());
